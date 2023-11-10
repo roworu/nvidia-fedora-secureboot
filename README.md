@@ -10,7 +10,7 @@ sudo grubby --update-kernel=ALL --remove-args='quiet'
 
 ## Processing:
 
-1) Add rpmfusion repos:
+#### 1) Add rpmfusion repos:
 
 free:
 ```
@@ -23,33 +23,33 @@ sudo dnf install \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 ```
 
-2) Full update of sysytem:
+#### 2) Full update of system:
 ```
 sudo dnf upgrade --refresh
 ```
-3) Reboot!
+#### 3) Reboot!
 
-4) Install signing modules:
+#### 4) Install signing modules:
 ```
 sudo dnf install kmodtool akmods mokutil openssl
 ```
-5) Generate a key:
+#### 5) Generate a key:
 ```
 sudo kmodgenca -a
 ```
-6) Import your key, and set password to it, no need for complex passwords:
+#### 6) Import your key, and set password to it, no need for complex passwords:
 ```
 sudo mokutil --import /etc/pki/akmods/certs/public_key.der
 ```
-7) Reboot!
+#### 7) Reboot!
 
-8) MOK manager will ask you, if you want to proceed with boot, or import the key. Pick import the key, type in a password created in (7)
+#### 8) MOK manager will ask you, if you want to proceed with boot, or import the key. Pick import the key, type in a password created in (7)
 
-9) Install NVIDIA drivers:
+#### 9) Install NVIDIA drivers:
 ```
 sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
 ```
-10) Wait for modules to build! You can check build process via htop, or by typing:
+#### 10) Wait for modules to build! You can check build process via htop, or by typing:
 ```
 modinfo -F version nvidia
 ```
@@ -58,13 +58,13 @@ It should return you driver verion like this:
 
 If it shows ERROR: Module nvidia not found - modules are still building, keep waiting.
 
-11) Recheck, that modules built:
+#### 11) Recheck, that modules built:
 ```
 sudo akmods --force
 ```
-12) Recheck boot image update:
+#### 12) Recheck boot image update:
 ```
 sudo dracut --force
 ```
-13) Reboot!
+#### 13) Reboot!
 
