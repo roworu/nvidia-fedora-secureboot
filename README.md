@@ -1,13 +1,23 @@
 # nvidia-fedora-secureboot
+## Preconditions:
+1) only tested for **Fedora 39** and **latest NVIDIA** drivers!
+2) Secure Boot is **turned ON in setup mode**
+3) Delete ALL older NVIDIA installations! 
+4) I recommend turning OFF 'quiet' boot option, for easier debugging, you can do it with following command:
+```
+sudo grubby --update-kernel=ALL --remove-args='quiet'
+``` 
 
+## Processing:
 
 1) Add rpmfusion repos:
-   free:
+
+free:
 ```
 sudo dnf install \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 ```
-   nonfree:
+nonfree:
 ```
 sudo dnf install \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
@@ -57,3 +67,4 @@ sudo akmods --force
 sudo dracut --force
 ```
 13) Reboot!
+
