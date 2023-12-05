@@ -53,7 +53,7 @@ sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidi
 ```
 modinfo -F version nvidia
 ```
-It should return you driver verion like this:
+It should return you driver version like this:
 <img src="https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/ee673c2c-74db-4bd9-abc5-d50ae1c5404a" width="800">
 
 If it shows ERROR: Module nvidia not found - modules are still building, keep waiting.
