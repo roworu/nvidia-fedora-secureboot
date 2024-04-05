@@ -30,7 +30,9 @@ sudo dnf install \
 sudo dnf upgrade --refresh
 ```
 #### 3) Reboot!
-
+```
+sudo systemctl reboot
+```
 #### 4) Install signing modules:
 ```
 sudo dnf install kmodtool akmods mokutil openssl
@@ -44,8 +46,11 @@ sudo kmodgenca -a
 sudo mokutil --import /etc/pki/akmods/certs/public_key.der
 ```
 #### 7) Reboot!
-
+```
+sudo systemctl reboot
+```
 #### 8) MOK manager will ask you, if you want to proceed with boot, or import the key. Pick import the key, type in a password created in (7)
+<img src="https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/dec5b957-e562-4e9e-bd22-678007aecdcf" width="600">
 
 #### 9) Install NVIDIA drivers:
 ```
