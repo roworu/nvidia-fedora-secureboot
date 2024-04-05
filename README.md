@@ -1,12 +1,14 @@
 # nvidia-fedora-secureboot
+
 ## Preconditions:
-1) only tested for **Fedora 39** and **latest NVIDIA** drivers!
+1) This method tested for **Fedora 39/40** and **latest NVIDIA** drivers! NO matter if you use KDE or Gnome or anything else.
 2) Secure Boot is **turned ON in setup mode**
 3) Delete ALL older NVIDIA installations! 
-4) I recommend turning OFF 'quiet' boot option, for easier debugging, you can do it with following command:
+4) You could also turn OFF 'quiet' boot option, for easier debugging, with following command:
 ```
 sudo grubby --update-kernel=ALL --remove-args='quiet'
-``` 
+```
+It is not requierment, but could ease your life in case of some errors.
 
 ## Processing:
 
