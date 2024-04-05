@@ -54,7 +54,7 @@ sudo systemctl reboot
 
 #### 9) Install NVIDIA drivers:
 ```
-sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
+sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-cuda xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
 ```
 #### 10) Wait for modules to build! You can check build process via htop, or by typing:
 ```
