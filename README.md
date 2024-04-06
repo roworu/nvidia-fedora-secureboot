@@ -1,4 +1,12 @@
-# nvidia-fedora-secureboot
+# Fedora + Nvidia + Secureboot
+
+This is a short instruction I mostly wrote for myself. In this here is presented a quide on how to install **latest** Nvidia drivers for Fedora desktop.
+I don't know if it will also work for "Silverblue" edition, you probably need to check full instruction from official rpmfusion sources, as this instruction mostly based on it:
+
+https://rpmfusion.org/Howto/NVIDIA
+https://rpmfusion.org/Howto/Secure%20Boot
+
+Please, also note, that this will only work y
 
 ## Preconditions:
 1) This method tested for **Fedora 39/40** and **latest NVIDIA** drivers! NO matter if you use KDE or Gnome or anything else.
@@ -49,14 +57,18 @@ sudo mokutil --import /etc/pki/akmods/certs/public_key.der
 ```
 sudo systemctl reboot
 ```
-#### 8) MOK manager will ask you, if you want to proceed with boot, or enroll the key. Pick enroll the key, type in a password created in (7)
+#### 8) MOK manager will ask you, if you want to proceed with boot, or enroll the key. Pick "Enroll MOK", type in a password created in (7)
 <img src="https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/dec5b957-e562-4e9e-bd22-678007aecdcf" width="600">
 
 #### 9) Install NVIDIA drivers:
 ```
-sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-cuda xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
+sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
 ```
-#### 10) Wait for modules to build! You can check build process via htop, or by typing:
+#### 10) Also, you can install CUDA support, in case you need it and your GPU supports it:
+```
+sudo dnf install xorg-x11-drv-nvidia-cuda
+```
+#### 11) Wait for modules to build! You can check build process via htop, or by typing:
 ```
 modinfo -F version nvidia
 ```
@@ -65,11 +77,11 @@ It should return you driver version like this:
 
 If it shows ERROR: Module nvidia not found - modules are still building, keep waiting.
 
-#### 11) Recheck, that modules built:
+#### 12) Recheck, that modules built:
 ```
 sudo akmods --force
 ```
-#### 12) Recheck boot image update:
+#### 13) Recheck boot image update:
 ```
 sudo dracut --force
 ```
