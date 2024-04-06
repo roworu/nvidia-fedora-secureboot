@@ -56,7 +56,7 @@ sudo mokutil --import /etc/pki/akmods/certs/public_key.der
 ```
 sudo systemctl reboot
 ```
-#### 8) MOK manager will ask you, if you want to proceed with boot, or enroll the key. Pick "Enroll MOK", type in a password created in (7)
+#### 8) MOK manager will ask you, if you want to proceed with boot, or enroll the key. Pick "Enroll MOK" -> "Continue", type in a password created in (7)
 <img src="https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/dec5b957-e562-4e9e-bd22-678007aecdcf" width="600">
 
 #### 9) Install NVIDIA drivers:
