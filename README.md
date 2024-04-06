@@ -72,7 +72,7 @@ sudo dnf install xorg-x11-drv-nvidia-cuda
 modinfo -F version nvidia
 ```
 It should return you driver version like this:
-<img src="https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/ee673c2c-74db-4bd9-abc5-d50ae1c5404a" width="800">
+<img src="https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/d754d785-339a-4e03-97c7-f59e5b2b86b3" width="800">
 
 If it shows ERROR: Module nvidia not found - modules are still building, keep waiting.
 
@@ -84,5 +84,9 @@ sudo akmods --force
 ```
 sudo dracut --force
 ```
-#### 13) Reboot!
+#### 13) Reboot and we are done!
+
+![Screenshot from 2024-04-06 14-10-49](https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/458f4f30-82fb-426c-bdd0-a0029f68f2fd)
+
+
 
