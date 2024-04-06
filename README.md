@@ -1,12 +1,11 @@
-# Fedora + Nvidia + Secureboot
+# Fedora <img src="https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/2337478d-d34d-43df-9e8b-15c8edc2ff5c" width="20"> + Nvidia <img src="https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/118ae093-5c31-4aef-9c24-c58edc522630" width="20"> + Secureboot <img src="https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/0d7e652b-8ae4-485c-8098-a6b024308c7b" width="20">
 
-This is a short instruction I mostly wrote for myself. In this here is presented a quide on how to install **latest** Nvidia drivers for Fedora desktop.
+This is a short instruction I mostly wrote for myself. Here is presented a quide on how to install **latest** Nvidia drivers for Fedora desktop.
 I don't know if it will also work for "Silverblue" edition, you probably need to check full instruction from official rpmfusion sources, as this instruction mostly based on it:
 
-https://rpmfusion.org/Howto/NVIDIA
+https://rpmfusion.org/Howto/NVIDIA \
 https://rpmfusion.org/Howto/Secure%20Boot
 
-Please, also note, that this will only work y
 
 ## Preconditions:
 1) This method tested for **Fedora 39/40** and **latest NVIDIA** drivers! NO matter if you use KDE or Gnome or anything else.
