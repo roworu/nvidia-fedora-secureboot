@@ -1,6 +1,6 @@
 # Fedora <img src="https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/2337478d-d34d-43df-9e8b-15c8edc2ff5c" width="20"> + Nvidia <img src="https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/118ae093-5c31-4aef-9c24-c58edc522630" width="20"> + Secureboot <img src="https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/0d7e652b-8ae4-485c-8098-a6b024308c7b" width="20">
 
-This is a short instruction I mostly wrote for myself. Here is presented a quide on how to install **latest** Nvidia drivers for Fedora desktop.
+This is a short instruction I mostly wrote for myself. Here is presented a guide on how to install **latest** Nvidia drivers for Fedora desktop.
 I don't know if it will also work for "Silverblue" edition, you probably need to check full instruction from official rpmfusion sources, as this instruction mostly based on it:
 
 https://rpmfusion.org/Howto/NVIDIA \
@@ -9,7 +9,7 @@ https://rpmfusion.org/Howto/Secure%20Boot
 
 ## Preconditions:
 1) This method tested for **Fedora 39/40** and **latest NVIDIA** drivers! NO matter if you use KDE or Gnome or anything else.
-2) Secure Boot is **turned ON in setup mode**
+2) In BIOS, Secure Boot is **turned ON in setup mode**
 3) Delete ALL older NVIDIA installations! 
 4) You could also turn OFF 'quiet' boot option, for easier debugging, with following command:
 ```
@@ -76,7 +76,7 @@ It should return you driver version like this:
 
 If it shows ERROR: Module nvidia not found - modules are still building, keep waiting.
 
-#### 12) Recheck, that modules built:
+#### 12) Recheck, that modules built for currently running kernel:
 ```
 sudo akmods --force
 ```
