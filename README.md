@@ -87,7 +87,7 @@ sudo dracut --force
 #### 13) Reboot and we are done!
 
 ![Screenshot from 2024-04-06 14-10-49](https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/458f4f30-82fb-426c-bdd0-a0029f68f2fd)
-
+*<small>Task manager app on screenshot: https://flathub.org/apps/io.missioncenter.MissionCenter </small>*
 
 #### upd: 14) Disable GSP Firmware 
 
