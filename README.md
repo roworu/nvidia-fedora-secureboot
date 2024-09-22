@@ -89,4 +89,13 @@ sudo dracut --force
 ![Screenshot from 2024-04-06 14-10-49](https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/458f4f30-82fb-426c-bdd0-a0029f68f2fd)
 
 
+#### upd: 14) Disable GSP Firmware 
+
+```
+# For latest drivers (555-560) + wayland you might want to also disable GSP Firmware
+# source: https://forums.developer.nvidia.com/t/major-kde-plasma-desktop-frameskip-lag-issues-on-driver-555/293606
+sudo grubby --update-kernel=ALL nvidia.NVreg_EnableGpuFirmware=0
+```
+
+
 
