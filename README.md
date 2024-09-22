@@ -94,7 +94,7 @@ sudo dracut --force
 ```
 # For latest drivers (555-560) + wayland you might want to also disable GSP Firmware to reduce lags in Gnome/KDE
 # source: https://forums.developer.nvidia.com/t/major-kde-plasma-desktop-frameskip-lag-issues-on-driver-555/293606
-sudo grubby --update-kernel=ALL nvidia.NVreg_EnableGpuFirmware=0
+sudo grubby --update-kernel=ALL --args=nvidia.NVreg_EnableGpuFirmware=0
 ```
 
 
