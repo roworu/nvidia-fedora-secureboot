@@ -8,12 +8,15 @@ https://rpmfusion.org/Howto/Secure%20Boot
 
 
 ## Preconditions:
-1) This method tested for **Fedora 39/40** and **latest NVIDIA** drivers! NO matter if you use KDE or Gnome or anything else.
+1) This method tested for **Fedora 39/40/41** and **latest NVIDIA** drivers! NO matter if you use KDE or Gnome or any other DE/WM.
 2) In BIOS, Secure Boot is **turned ON in setup mode**
 3) Delete ALL older NVIDIA installations! 
 4) You could also turn OFF 'quiet' boot option, for easier debugging, with following command:
 ```
-sudo grubby --update-kernel=ALL --remove-args='quiet'
+# To remove:
+sudo grubby --update-kernel=ALL --remove-args=quiet
+# To return:
+sudo grubby --update-kernel=ALL --args=quiet
 ```
 It is not requierment, but could ease your life in case of some errors.
 
@@ -84,18 +87,20 @@ sudo akmods --force
 ```
 sudo dracut --force
 ```
-#### 13) Reboot and we are done!
 
-![Screenshot from 2024-04-06 14-10-49](https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/458f4f30-82fb-426c-bdd0-a0029f68f2fd)
-*<small>Task manager app on screenshot: https://flathub.org/apps/io.missioncenter.MissionCenter </small>*
-
-#### upd: 14) Disable GSP Firmware 
+#### 13.1) Disable GSP Firmware 
 
 ```
 # For latest drivers (555-560) + wayland you might want to also disable GSP Firmware to reduce lags in Gnome/KDE
 # source: https://forums.developer.nvidia.com/t/major-kde-plasma-desktop-frameskip-lag-issues-on-driver-555/293606
 sudo grubby --update-kernel=ALL --args=nvidia.NVreg_EnableGpuFirmware=0
 ```
+#### 14) Reboot and we are done!
+
+![Screenshot from 2024-04-06 14-10-49](https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/458f4f30-82fb-426c-bdd0-a0029f68f2fd)
+*<small>Task manager app on screenshot: https://flathub.org/apps/io.missioncenter.MissionCenter </small>*
+
+
 
 
 
