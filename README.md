@@ -137,7 +137,7 @@ sudo akmods --force
 sudo dracut --force
 ```
 
-### 13) Disable GSP Firmware
+#### 13) Disable GSP Firmware
 
 For newer NVIDIA drivers (555-570) + Wayland, you may want to disable GSP firmware to reduce stuttering in GNOME/KDE.
 
@@ -155,7 +155,7 @@ Sources:
     https://forums.developer.nvidia.com/t/stutering-and-low-fps-scrolling-in-browsers-on-wayland-when-gsp-firmware-is-enabled/311127/15
 
     https://forums.developer.nvidia.com/t/570-release-feedback-discussion/321956/69
-    
+
 #### 14) Reboot, and you're done!
 
 ![Screenshot from 2024-04-06 14-10-49](https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/458f4f30-82fb-426c-bdd0-a0029f68f2fd)  
