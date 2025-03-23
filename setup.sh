@@ -36,10 +36,18 @@ else
     sudo mokutil --import /etc/pki/akmods/certs/public_key.der
 
     # Final reboot before NVIDIA installation
-    echo "Final reboot required. During boot MOK manager will ask if you want to proceed with booting or enroll the key. Choose "Enroll MOK" -> "Continue" and enter the password created in the previous step."
+    echo "Reboot required. During boot, select 'Enroll MOK' -> 'Continue' and enter your password."
     echo -n "Reboot now? (y/n): "
     read reboot_confirm
     [[ "$reboot_confirm" =~ ^[Yy]$ ]] && touch /var/tmp/nvidia-setup-done && sudo systemctl reboot && exit 0
+fi
+
+# To prevent cases like in issue#2 
+if [[ "$(uname -r)" != "$(rpm -q --qf '%{VERSION}-%{RELEASE}.%{ARCH}\n' kernel-devel)" ]]; then
+    echo "WARNING: Installed kernel-devel does not match running kernel. Reboot required. If you still see this issue after reboot - something went wrong and you need to fix your kernel-devel package mismatch."
+    echo -n "Reboot now? (y/n): "
+    read reboot_confirm
+    [[ "$reboot_confirm" =~ ^[Yy]$ ]] && sudo systemctl reboot && exit 0
 fi
 
 # Install NVIDIA drivers
