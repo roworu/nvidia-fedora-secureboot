@@ -31,7 +31,7 @@ else
     sudo dnf install -y kmodtool akmods mokutil openssl
 
     # Generate and import key
-    echo "Generating key and importing it..."
+    echo "Generating key and importing it. Set a password for the key when prompted. No need for complex password."
     sudo kmodgenca -a
     sudo mokutil --import /etc/pki/akmods/certs/public_key.der
 
@@ -44,8 +44,7 @@ fi
 
 # Install NVIDIA drivers
 echo "Installing NVIDIA drivers..."
-sudo dnf install -y gcc kernel-headers kernel-devel akmod-nvidia \
-    xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
+sudo dnf install -y gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
 
 # Optional CUDA support
 echo -n "Install CUDA support? (y/n): "
