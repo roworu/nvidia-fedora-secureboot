@@ -68,15 +68,11 @@ sudo systemctl reboot
 #### 8) Install NVIDIA drivers:
 ```
 sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia \
- xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
+ xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs.{i686,x86_64} \
+ libva-nvidia-driver.{i686,x86_64} xorg-x11-drv-nvidia-cuda
 ```
 
-#### 8) (Optional) Install CUDA support if needed and supported by your GPU:
-```
-sudo dnf install xorg-x11-drv-nvidia-cuda
-```
-
-#### 10) Wait for the modules to build! You can monitor the build process using `htop` or by typing:
+#### 9) Wait for the modules to build! You can monitor the build process using `htop` or by typing:
 ```
 modinfo -F version nvidia
 ```
@@ -85,19 +81,19 @@ It should return the driver version like this:
 
 If it shows `ERROR: Module nvidia not found`, the modules are still building—keep waiting.
 
-#### 11) Ensure the modules are built for the currently running kernel and boot image:
+#### 10) Ensure the modules are built for the currently running kernel and boot image:
 ```
 sudo akmods --force && sudo dracut --force
 ```
 
-#### 11.1) Disable GSP Firmware:  
+#### 10.1) Disable GSP Firmware:  
 For newer drivers (555-560) + Wayland, you may want to disable GSP Firmware to reduce lags in Gnome/KDE:
 ```
 sudo grubby --update-kernel=ALL --args=nvidia.NVreg_EnableGpuFirmware=0
 ```
 *Source:* https://forums.developer.nvidia.com/t/major-kde-plasma-desktop-frameskip-lag-issues-on-driver-555/293606
 
-#### 12) Reboot, and you're done!
+#### 11) Reboot, and you're done!
 
 ![Screenshot from 2024-04-06 14-10-49](https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/458f4f30-82fb-426c-bdd0-a0029f68f2fd)  
 *<small>Task manager app in the screenshot: https://flathub.org/apps/io.missioncenter.MissionCenter</small>*
