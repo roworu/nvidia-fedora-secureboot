@@ -11,7 +11,7 @@ It is primarily written for personal use, but it may also be useful (hopefully) 
 
 
 ## Preconditions:
-1) This method has been tested on Fedora 39/40/41/42 with the latest NVIDIA drivers. It works with KDE, GNOME, or any other desktop environment/window manager.
+1) This method has been tested on Fedora 39+ with the latest NVIDIA drivers. It works with KDE, GNOME, or any other desktop environment/window manager.
 2) Secure Boot must be enabled in setup mode in your BIOS/UEFI settings (some BIOS versions call this "Custom Mode").
 3) Remove any existing NVIDIA drivers before proceeding:
 
@@ -19,7 +19,7 @@ It is primarily written for personal use, but it may also be useful (hopefully) 
 dnf remove xorg-x11-drv-nvidia\*
 ```
 
-🔄 Reboot after removing old drivers.
+Reboot after removing old drivers.
 
 4) For easier debugging, you can disable the 'quiet' boot option:
 ```bash
