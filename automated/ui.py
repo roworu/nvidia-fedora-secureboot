@@ -1,83 +1,110 @@
-import tkinter as tk
-from tkinter import ttk
-from tkinter.scrolledtext import ScrolledText
-import subprocess
-import threading
 import os
 import sys
+from PyQt6.QtWidgets import (
+    QApplication, QWidget, QVBoxLayout, QHBoxLayout,
+    QCheckBox, QPushButton, QTextEdit, QLabel
+)
+from PyQt6.QtCore import QProcess, Qt
 
 
 SCRIPT_PATH = os.path.join(os.path.dirname(__file__), "setup.py")
 
 
-def stream_process(cmd, env, log_widget):
-    process = subprocess.Popen(
-        cmd,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-        env=env
-    )
-
-    for line in process.stdout:
-        log_widget.insert(tk.END, line)
-        log_widget.see(tk.END)
-
-    process.wait()
-    log_widget.insert(tk.END, f"\n[exit code: {process.returncode}]\n")
-    log_widget.see(tk.END)
-
-
-def run_async(cmd, env, log_widget):
-    t = threading.Thread(
-        target=stream_process,
-        args=(cmd, env, log_widget),
-        daemon=True
-    )
-    t.start()
-
-
-class InstallerUI(tk.Tk):
+class InstallerUI(QWidget):
     def __init__(self):
         super().__init__()
-        self.title("NVIDIA Driver Installer")
-        self.geometry("650x500")
+        self.setWindowTitle("NVIDIA Driver Installer")
+        self.setMinimumSize(700, 500)
 
-        top = ttk.Frame(self)
-        top.pack(pady=10)
+        layout = QVBoxLayout(self)
 
-        self.cuda_var = tk.BooleanVar(value=True)
-        self.gsp_var = tk.BooleanVar(value=True)
+        # --- Top checkboxes ---
+        top = QHBoxLayout()
+        self.cuda_box = QCheckBox("Install CUDA")
+        self.cuda_box.setChecked(True)
+        self.gsp_box = QCheckBox("Disable GSP Firmware")
+        self.gsp_box.setChecked(True)
 
-        ttk.Checkbutton(top, text="Install CUDA", variable=self.cuda_var).grid(row=0, column=0, padx=20)
-        ttk.Checkbutton(top, text="Disable GSP", variable=self.gsp_var).grid(row=0, column=1, padx=20)
+        top.addWidget(self.cuda_box)
+        top.addWidget(self.gsp_box)
+        layout.addLayout(top)
 
-        ttk.Button(self, text="INSTALL", command=self.on_install)\
-            .pack(pady=20)
+        # --- Install button ---
+        self.install_btn = QPushButton("INSTALL")
+        self.install_btn.setFixedHeight(40)
+        self.install_btn.clicked.connect(self.on_install)
+        layout.addWidget(self.install_btn, alignment=Qt.AlignmentFlag.AlignHCenter)
 
-        self.log_area = ScrolledText(self, height=18)
-        self.log_area.pack(fill="both", expand=True, padx=10, pady=10)
+        # --- Logs box ---
+        self.log_area = QTextEdit()
+        self.log_area.setReadOnly(True)
+        layout.addWidget(self.log_area)
+
+        # --- QProcess handle ---
+        self.process = QProcess(self)
+        self.process.readyReadStandardOutput.connect(self.on_stdout)
+        self.process.readyReadStandardError.connect(self.on_stderr)
+        self.process.finished.connect(self.on_finished)
+
+    # ------------------------------------------------------
 
     def on_install(self):
+        self.log_area.clear()
+        self.log("Starting installation...\n")
+
         env = os.environ.copy()
-        env["INSTALL_CUDA"] = "1" if self.cuda_var.get() else "0"
-        env["DISABLE_GSP"] = "1" if self.gsp_var.get() else "0"
+        env["INSTALL_CUDA"] = "1" if self.cuda_box.isChecked() else "0"
+        env["DISABLE_GSP"] = "1" if self.gsp_box.isChecked() else "0"
 
-        self.log_area.insert(tk.END, "Starting installation...\n")
-        self.log_area.insert(
-            tk.END,
-            f"INSTALL_CUDA={env['INSTALL_CUDA']}  DISABLE_GSP={env['DISABLE_GSP']}\n\n"
+        self.log(f"INSTALL_CUDA={env['INSTALL_CUDA']}  DISABLE_GSP={env['DISABLE_GSP']}\n\n")
+
+        # ----------------------------
+        # pkexec python3 nvidia_installer.py
+        # ----------------------------
+        cmd = ["pkexec", sys.executable, SCRIPT_PATH]
+
+        # Start process
+        self.process.setProcessEnvironment(
+            QProcess.ProcessEnvironment.fromSystemEnvironment()
         )
-        self.log_area.see(tk.END)
 
-        cmd = [
-            "pkexec",
-            sys.executable,
-            SCRIPT_PATH
-        ]
+        # Inject our environment variables
+        for k, v in env.items():
+            self.process.processEnvironment().insert(k, v)
 
-        run_async(cmd, env, self.log_area)
+        self.process.start(cmd[0], cmd[1:])
+
+        if not self.process.waitForStarted(2000):
+            self.log("ERROR: Could not start the installer process.\n")
+
+    # ------------------------------------------------------
+
+    def on_stdout(self):
+        data = self.process.readAllStandardOutput().data().decode()
+        self.log(data)
+
+    def on_stderr(self):
+        data = self.process.readAllStandardError().data().decode()
+        self.log(data)
+
+    def on_finished(self, exit_code, status):
+        self.log(f"\n[process finished with exit code {exit_code}]\n")
+
+    # ------------------------------------------------------
+
+    def log(self, text):
+        self.log_area.insertPlainText(text)
+        self.log_area.moveCursor(self.log_area.textCursor().End)
+
+
+# ----------------------------------------------------------
+
+def main():
+    app = QApplication(sys.argv)
+    win = InstallerUI()
+    win.show()
+    sys.exit(app.exec())
 
 
 if __name__ == "__main__":
-    InstallerUI().mainloop()
+    main()
