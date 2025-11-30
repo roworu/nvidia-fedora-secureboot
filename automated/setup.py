@@ -1,12 +1,14 @@
-#!/usr/bin/env python3
+import os
 import sys
 import time
 import logging
 import subprocess
 from pathlib import Path
 
-INSTALL_CUDA = True
-DISABLE_GSP = True
+
+INSTALL_CUDA = os.environ.get('INSTALL_CUDA', "True").lower().split() == "true"
+DISABLE_GSP = os.environ.get('DISABLE_GSP', "True").lower().split() == "true"
+
 
 _log = logging.getLogger(__name__)
 
