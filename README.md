@@ -93,7 +93,7 @@ sudo akmods --force && sudo dracut --force
 
 #### 11) Disable GSP Firmware
 
-For newer NVIDIA drivers (555-570) + Wayland, you may want to disable GSP firmware to reduce stuttering in GNOME/KDE.
+For newer NVIDIA drivers (555+) + Wayland, you may want to disable GSP firmware to reduce stuttering in GNOME/KDE.
 
 However, this issue varies by system, and you may not need to disable it. Test your setup first before applying this change.
 
