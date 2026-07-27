@@ -71,11 +71,17 @@ sudo systemctl reboot
 <img src="https://github.com/roworu/nvidia-fedora-secureboot/assets/36964755/dec5b957-e562-4e9e-bd22-678007aecdcf" width="600">
 
 #### 8) Install NVIDIA drivers:
+For GPUs supported by the current NVIDIA driver branch (some GeForce, Quadro, Tesla, should be suitable for any GPU found in 2017 and later): 
+
 ```bash
 sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia \
  xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs.{i686,x86_64} \
  libva-nvidia-driver.{i686,x86_64} xorg-x11-drv-nvidia-cuda
 ```
+
+For older GPUs that are no longer supported by the latest NVIDIA driver branch (GTX 800/900/10, GeForce 400/500/600/700, etc.), install the appropriate legacy driver version according to the official RPM Fusion documentation:
+
+https://rpmfusion.org/Howto/NVIDIA
 
 #### 9) Wait for the modules to build! You can monitor the build process using `htop` or by typing:
 ```bash
